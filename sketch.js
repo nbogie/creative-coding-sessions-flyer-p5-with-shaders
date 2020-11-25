@@ -6,6 +6,7 @@
 //this variable will hold our shader object
 
 let myShader;
+let objects;
 
 //a disturbance, 0-1 which we pass to the shader to affect amplitude of oscillation
 //Increases with user activity, and decays over time.
@@ -27,9 +28,17 @@ function setup() {
   noStroke();
   mouseX = width / 2;
   mouseY = height / 2;
-
+  createObjects();
 }
-
+function createObjects() {
+  objects = [];
+  for (let i = 0; i < 3; i++) {
+    objects.push({
+      position: p5.Vector.random3D().setMag(random(200, 300)),
+      diameter: random(0.02, 0.1) * width
+    });
+  }
+}
 function draw() {
   background(0);
   orbitControl(1, 1, 0.02);
@@ -48,7 +57,15 @@ function draw() {
   // Draw some geometry to the screen
   // We're going to tessellate the sphere a bit so we have some more geometry to work with
   const detail = 200;
-  sphere(width / 5, detail, detail);
+  for (let obj of objects) {
+    push();
+    translate(obj.position);
+    sphere(obj.diameter, detail, detail);
+    pop();
+
+  }
+
+
   //Decay the disturbance a little so that it calms over time
   disturbance = max(0.0, disturbance - 0.003);
 }
