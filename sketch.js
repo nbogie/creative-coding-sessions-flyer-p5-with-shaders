@@ -1,3 +1,7 @@
+//This is a slight modification of Adam Ferriss' example: 
+// 6-2_vertexDisplacement: 
+// https://github.com/aferriss/p5jsShaderExamples/tree/gh-pages/6_3d/6-2_vertexDisplacement
+
 /// <reference path="../../node_modules/@types/p5/global.d.ts" />
 //this variable will hold our shader object
 
